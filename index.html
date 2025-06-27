@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Moda&Estilo18</title>
+  <title>Moda&EstiloKm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -449,7 +449,7 @@
 <body>
 
   <header>
-    <h1>Moda & Estilo colo</h1>
+    <h1>Moda & Estilo co</h1>
   </header>
 
   <div id="notificacion" class="notificacion oculto">Producto agregado al carrito 🛒</div>
@@ -501,43 +501,40 @@
     aria-label="Chatea con nosotros por WhatsApp">
     <i class="fab fa-whatsapp"></i><span class="texto-wsp"> </span>
   </a>
-
-
-  <!-- Panel Admin oculto -->
-  <div id="admin-panel"
-    style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 0 15px rgba(0,0,0,0.2); z-index:9999; width:90%; max-width:450px;">
-    <div id="admin-login">
-      <h3>🔐 Acceso Administrador</h3>
-      <input id="admin-usuario" placeholder="👤 Usuario" class="input" />
-      <input id="admin-clave" placeholder="🔒 Clave" type="password" class="input" />
-      <button onclick="loginAdmin()" class="btn btn-success">Entrar</button>
-      <button onclick="cerrarAdminPanel()" class="btn btn-secondary">Cerrar</button>
-    </div>
-
-    <div id="admin-contenido" style="display:none;">
-      <h3>🛠️ Panel de Control</h3>
-
-      <h4>Editar producto existente</h4>
-      <select id="selectorProducto" class="input"></select>
-      <input id="nuevaImagen" class="input" placeholder="📷 URL nueva imagen" />
-      <input id="nuevasTallas" class="input" placeholder="📏 Tallas separadas por coma (35,36...)" />
-      <button onclick="actualizarProducto()" class="btn btn-success">Actualizar</button>
-      <button onclick="eliminarProductoDesdePanel()">🗑️ Eliminar seleccionado</button>
-
-      <hr>
-
-      <h4>➕ Agregar nuevo producto</h4>
-      <input id="nuevoNombre" class="input" placeholder="📝 Nombre del producto" />
-      <input id="nuevoPrecio" class="input" placeholder="💲 Precio actual (ej: 120000)" />
-      <input id="nuevoPrecioOriginal" class="input" placeholder="💲 Precio original (ej: 150000)" />
-      <input id="nuevoImagen" class="input" placeholder="🖼️ URL imagen principal" />
-      <input id="nuevoColor" class="input" placeholder="🎨 Color (ej: negro, blanco...)" />
-      <input id="nuevoTallas" class="input" placeholder="📏 Tallas separadas por coma" />
-      <button onclick="agregarNuevoProducto()" class="btn btn-success">Agregar Producto</button>
-
-      <button onclick="cerrarAdminPanel()" class="btn btn-secondary" style="margin-top:10px;">Cerrar</button>
-    </div>
+<div id="admin-panel" style="display:none;">
+  <!-- Formulario de login -->
+  <div id="admin-login">
+    <input id="admin-usuario" placeholder="Usuario">
+    <input id="admin-clave" type="password" placeholder="Clave">
+    <button onclick="loginAdmin()">Entrar</button>
   </div>
+
+  <!-- Panel de contenido del administrador -->
+  <div id="admin-contenido" style="display:none;">
+    <h3>🛠️ Panel de Control</h3>
+
+    <h4>Editar producto existente</h4>
+    <select id="selectorProducto" class="input"></select>
+    <input id="nuevaImagen" class="input" placeholder="📷 URL nueva imagen" />
+    <input id="nuevasTallas" class="input" placeholder="📏 Tallas separadas por coma (35,36...)" />
+    <button onclick="actualizarProducto()" class="btn btn-success">Actualizar</button>
+    <button onclick="eliminarProductoDesdePanel()">🗑️ Eliminar seleccionado</button>
+
+    <hr>
+
+    <h4>➕ Agregar nuevo producto</h4>
+    <input id="nuevoNombre" class="input" placeholder="📝 Nombre del producto" />
+    <input id="nuevoPrecio" class="input" placeholder="💲 Precio actual (ej: 120000)" />
+    <input id="nuevoPrecioOriginal" class="input" placeholder="💲 Precio original (ej: 150000)" />
+    <input id="nuevoImagen" class="input" placeholder="🖼️ URL imagen principal" />
+    <input id="nuevoColor" class="input" placeholder="🎨 Color (ej: negro, blanco...)" />
+    <input id="nuevoTallas" class="input" placeholder="📏 Tallas separadas por coma" />
+    <button onclick="agregarNuevoProducto()" class="btn btn-success">Agregar Producto</button>
+
+    <button onclick="cerrarAdminPanel()" class="btn btn-secondary" style="margin-top:10px;">Cerrar</button>
+  </div>
+</div>
+
 
   <footer style="text-align: center; padding: 1rem; background: #2d3b49; color: white;">
     <div style="font-size: 1.8rem;">
@@ -553,6 +550,21 @@
     </div>
   </footer>
 
+<script>
+  // ✅ Configuración de Firebase ya personalizada
+  const firebaseConfig = {
+    apiKey: "AIzaSyCdRD_7zjuRp5586wcaa2WA_ZhzecKf5jM",
+    authDomain: "modaestilo-e8dec.firebaseapp.com",
+    projectId: "modaestilo-e8dec",
+    storageBucket: "modaestilo-e8dec.firebasestorage.app",
+    messagingSenderId: "710901651909",
+    appId: "1:710901651909:web:fe0bd97a14b25e191653ac"
+  };
+
+  // ✅ Inicializar Firebase y Firestore
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
 
   <script>
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -704,34 +716,7 @@
         mostrarNotificacion();
       });
     }
-
-    // ==== PANEL ADMINISTRADOR ====
-    let keysPressed = new Set();
-    document.addEventListener("keydown", e => {
-      keysPressed.add(e.key);
-      if (keysPressed.has("Control") && keysPressed.has("Shift") && keysPressed.has("A")) {
-        document.getElementById("admin-panel").style.display = "block";
-      }
-    });
-    document.addEventListener("keyup", e => keysPressed.delete(e.key));
-
-    function cerrarAdminPanel() {
-      document.getElementById("admin-panel").style.display = "none";
-      document.getElementById("admin-login").style.display = "block";
-      document.getElementById("admin-contenido").style.display = "none";
-    }
-
-    function loginAdmin() {
-      const usuario = document.getElementById("admin-usuario").value;
-      const clave = document.getElementById("admin-clave").value;
-      if (usuario === "admin" && clave === "1234") {
-        document.getElementById("admin-login").style.display = "none";
-        document.getElementById("admin-contenido").style.display = "block";
-        cargarProductos();
-      } else {
-        alert("Usuario o clave incorrecta.");
-      }
-    }
+ 
 
      // === ACTUALIZADO PANEL ADMINISTRADOR ===
   function cargarProductos() {
@@ -769,12 +754,10 @@
         });
     }
   }
-
-    function actualizarProducto() {
+function actualizarProducto() {
   const selector = document.getElementById("selectorProducto");
   const id = selector.value;
-  const index = selector.selectedIndex;
-  const producto = document.querySelectorAll(".producto")[index];
+  const producto = document.querySelector(`.producto[data-id="${id}"]`);
   if (!producto) return alert("❌ Producto no encontrado.");
 
   const nuevaImagen = document.getElementById("nuevaImagen").value.trim();
@@ -784,7 +767,7 @@
     return alert("⚠️ Ingresa al menos un cambio (imagen o tallas).");
   }
 
-  // Actualizar visualmente
+  // ✅ Actualizar en pantalla
   if (nuevaImagen) {
     producto.querySelector(".main-img").src = nuevaImagen;
   }
@@ -794,7 +777,7 @@
     selectTalla.innerHTML = nuevasTallas.map(t => `<option>${t}</option>`).join("");
   }
 
-  // Actualizar en Firebase
+  // ✅ Actualizar en Firebase
   const updateData = {};
   if (nuevaImagen) updateData.imagen = nuevaImagen;
   if (nuevasTallas.length > 0) updateData.tallas = nuevasTallas;
@@ -809,7 +792,6 @@
       alert("❌ No se pudo guardar en Firebase.");
     });
 }
-
 
     function agregarNuevoProducto() {
       const nombre = document.getElementById("nuevoNombre").value.trim();
@@ -882,10 +864,7 @@
       });
     }
 
-    window.addEventListener("DOMContentLoaded", () => {
-      actualizarCarrito();
-      cargarProductosDesdeFirebase();
-    });
+
 
     function guardarProductoEnFirebase(data) {
       return db.collection("productos").add(data);
@@ -905,7 +884,52 @@
           .catch(err => console.error("❌ Error eliminando producto:", err));
       }
     }
-  </script>
+
+  // Acceso al modo administrador mediante combinación secreta
+
+window.addEventListener("DOMContentLoaded", () => {
+  actualizarCarrito();
+  cargarProductosDesdeFirebase();
+
+  // ✅ Acceso al modo administrador mediante combinación secreta
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'a') {
+      e.preventDefault();
+      const panel = document.getElementById("admin-panel");
+      if (panel) {
+        panel.style.display = "block";
+        document.getElementById("admin-login").style.display = "block";
+        document.getElementById("admin-contenido").style.display = "none";
+      } else {
+        alert("No se encontró el panel de administrador.");
+      }
+    }
+  });
+});
+
+
+  window.loginAdmin = function () {
+    const usuario = document.getElementById("admin-usuario").value.trim();
+    const clave = document.getElementById("admin-clave").value.trim();
+
+    if (usuario === "admin" && clave === "1234") {
+      document.getElementById("admin-login").style.display = "none";
+      document.getElementById("admin-contenido").style.display = "block";
+    } else {
+      alert("❌ Usuario o clave incorrectos");
+    }
+  };
+
+  window.cerrarAdminPanel = function () {
+    document.getElementById("admin-panel").style.display = "none";
+    document.getElementById("admin-login").style.display = "block";
+    document.getElementById("admin-contenido").style.display = "none";
+    document.getElementById("admin-usuario").value = "";
+    document.getElementById("admin-clave").value = "";
+  };
+
+
+</script>
 
 
 </body>
