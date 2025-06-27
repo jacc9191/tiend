@@ -1,15 +1,16 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="utf-8"/>
-<title>Moda&amp;EstiloKm</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet"/>
-<style>
+  <meta charset="UTF-8">
+  <title>Moda&Estim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
     /* ==== RESET GLOBAL ==== */
     *,
     *::before,
@@ -443,101 +444,130 @@
       }
     }
   </style>
-</meta></head>
-<body>
-<header>
-<h1>Moda &amp; Estilo co</h1>
-</header>
-<div class="notificacion oculto" id="notificacion">Producto agregado al carrito 🛒</div>
-<!-- Botón que despliega TODO -->
-<div class="fila-carrito">
-<button class="btn-ver-carrito" onclick="toggleCarrito()">Ver Carrito</button>
-</div>
-<!-- Contenedor de todo: carrito, total, botones y formulario -->
-<div class="oculto container" id="bloqueCarrito">
-<div id="carrito"></div>
-<div id="total-carrito"></div>
-<div style="text-align:center; margin-top: 1rem;">
-<button class="btn btn-success" onclick="mostrarFormulario()">✅ Finalizar compra</button>
-</div>
-<!-- Formulario dentro del mismo bloque -->
-<div class="oculto" id="formularioCliente" style="margin-top: 2rem;">
-<h3>📋 Datos del Cliente</h3>
-<form onsubmit="event.preventDefault(); confirmarEnvioWhatsApp();">
-<input class="input" id="nombreCliente" placeholder="👤 Nombre completo" required=""/>
-<input class="input" id="departamentoCliente" placeholder="🏛️ Departamento" required=""/>
-<input class="input" id="ciudadCliente" placeholder="🏙️ Ciudad" required=""/>
-<input class="input" id="direccionCliente" placeholder="🏠 Dirección" required=""/>
-<input class="input" id="celularCliente" placeholder="📞 Celular" required=""/>
-<select class="input" id="metodoPagoCliente" required="">
-<option value="">💳 Selecciona método de pago</option>
-<option value="Efectivo">Efectivo</option>
-<option value="Transferencia">Transferencia</option>
-<option value="Contra entrega">Contra entrega</option>
-</select>
-<button class="btn btn-success" type="submit">📲 Enviar pedido por WhatsApp</button>
-<button class="btn btn-secondary" onclick="ocultarFormulario()" type="button">🔙 Volver</button>
-</form>
-</div>
-</div>
-<div id="contenedor-productos"></div>
-<a aria-label="Chatea con nosotros por WhatsApp" class="btn-whatsapp" href="https://wa.me/573185634316" target="_blank">
-<i class="fab fa-whatsapp"></i><span class="texto-wsp"> </span>
-</a>
-<div id="admin-panel" style="display:none;">
-<!-- Formulario de login -->
-<div id="admin-login">
-<input id="admin-usuario" placeholder="Usuario"/>
-<input id="admin-clave" placeholder="Clave" type="password"/>
-<button onclick="loginAdmin()">Entrar</button>
-</div>
-<!-- Panel de contenido del administrador -->
-<div id="admin-contenido" style="display:none;">
-<h3>🛠️ Panel de Control</h3>
-<h4>Editar producto existente</h4>
-<select class="input" id="selectorProducto"></select>
-<input class="input" id="nuevaImagen" placeholder="📷 URL nueva imagen">
-<input class="input" id="nuevasTallas" placeholder="📏 Tallas separadas por coma (35,36...)">
-<button class="btn btn-success" onclick="actualizarProducto()">Actualizar</button>
-<button onclick="eliminarProductoDesdePanel()">🗑️ Eliminar seleccionado</button>
-<hr/>
-<h4>➕ Agregar nuevo producto</h4>
-<input class="input" id="nuevoNombre" placeholder="📝 Nombre del producto"/>
-<input class="input" id="nuevoPrecio" placeholder="💲 Precio actual (ej: 120000)"/>
-<input class="input" id="nuevoPrecioOriginal" placeholder="💲 Precio original (ej: 150000)"/>
-<input class="input" id="nuevoImagen" placeholder="🖼️ URL imagen principal"/>
-<input class="input" id="nuevoColor" placeholder="🎨 Color (ej: negro, blanco...)"/>
-<input class="input" id="nuevoTallas" placeholder="📏 Tallas separadas por coma"/>
-<button class="btn btn-success" onclick="agregarNuevoProducto()">Agregar Producto</button>
-<button class="btn btn-secondary" onclick="cerrarAdminPanel()" style="margin-top:10px;">Cerrar</button>
-</input></input></div>
-</div>
-<footer style="text-align: center; padding: 1rem; background: #2d3b49; color: white;">
-<div style="font-size: 1.8rem;">
-<a href="https://facebook.com/tu-pagina" style="margin: 0 10px; color: #0e54eb;" target="_blank"><i class="fab fa-facebook"></i></a>
-<a href="https://instagram.com/tu-pagina" style="margin: 0 10px; color: #e1306c;" target="_blank"><i class="fab fa-instagram"></i></a>
-<a href="https://www.tiktok.com/@tu-cuenta" style="margin: 0 10px; color: #000000;" target="_blank"><i class="fab fa-tiktok"></i></a>
-</div>
-<div style="font-size: 0.9rem; color: #ccc;">
-      © 2025 Moda &amp; Estilo. Todos los derechos reservados.
-    </div>
-</footer>
-<script>
-  // ✅ Configuración de Firebase ya personalizada
-  const firebaseConfig = {
-    apiKey: "AIzaSyCdRD_7zjuRp5586wcaa2WA_ZhzecKf5jM",
-    authDomain: "modaestilo-e8dec.firebaseapp.com",
-    projectId: "modaestilo-e8dec",
-    storageBucket: "modaestilo-e8dec.firebasestorage.app",
-    messagingSenderId: "710901651909",
-    appId: "1:710901651909:web:fe0bd97a14b25e191653ac"
-  };
 
-  // ✅ Inicializar Firebase y Firestore
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-</script>
-<script>
+</head>
+
+<body>
+
+  <header>
+    <h1>Moda & Estilo co</h1>
+  </header>
+
+  <div id="notificacion" class="notificacion oculto">Producto agregado al carrito 🛒</div>
+  <!-- Botón que despliega TODO -->
+  <div class="fila-carrito">
+    <button class="btn-ver-carrito" onclick="toggleCarrito()">Ver Carrito</button>
+  </div>
+
+
+  <!-- Contenedor de todo: carrito, total, botones y formulario -->
+  <div id="bloqueCarrito" class="oculto container">
+
+
+    <div id="carrito"></div>
+
+    <div id="total-carrito"></div>
+
+    <div style="text-align:center; margin-top: 1rem;">
+      <button class="btn btn-success" onclick="mostrarFormulario()">✅ Finalizar compra</button>
+    </div>
+
+    <!-- Formulario dentro del mismo bloque -->
+    <div id="formularioCliente" class="oculto" style="margin-top: 2rem;">
+      <h3>📋 Datos del Cliente</h3>
+      <form onsubmit="event.preventDefault(); confirmarEnvioWhatsApp();">
+        <input class="input" id="nombreCliente" placeholder="👤 Nombre completo" required />
+        <input class="input" id="departamentoCliente" placeholder="🏛️ Departamento" required />
+        <input class="input" id="ciudadCliente" placeholder="🏙️ Ciudad" required />
+        <input class="input" id="direccionCliente" placeholder="🏠 Dirección" required />
+        <input class="input" id="celularCliente" placeholder="📞 Celular" required />
+        <select class="input" id="metodoPagoCliente" required>
+          <option value="">💳 Selecciona método de pago</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Transferencia">Transferencia</option>
+          <option value="Contra entrega">Contra entrega</option>
+        </select>
+        <button type="submit" class="btn btn-success">📲 Enviar pedido por WhatsApp</button>
+        <button type="button" class="btn btn-secondary" onclick="ocultarFormulario()">🔙 Volver</button>
+      </form>
+    </div>
+
+  </div>
+
+
+  <div id="contenedor-productos"></div>
+
+
+  <a href="https://wa.me/573185634316" target="_blank" class="btn-whatsapp"
+    aria-label="Chatea con nosotros por WhatsApp">
+    <i class="fab fa-whatsapp"></i><span class="texto-wsp"> </span>
+  </a>
+  <div id="admin-panel" style="display:none;">
+    <!-- Formulario de login -->
+    <div id="admin-login">
+      <input id="admin-usuario" placeholder="Usuario">
+      <input id="admin-clave" type="password" placeholder="Clave">
+      <button onclick="loginAdmin()">Entrar</button>
+    </div>
+
+    <!-- Panel de contenido del administrador -->
+    <div id="admin-contenido" style="display:none;">
+      <h3>🛠️ Panel de Control</h3>
+
+      <h4>Editar producto existente</h4>
+      <select id="selectorProducto" class="input"></select>
+      <input id="nuevaImagen" class="input" placeholder="📷 URL nueva imagen" />
+      <input id="nuevasTallas" class="input" placeholder="📏 Tallas separadas por coma (35,36...)" />
+      <button onclick="actualizarProducto()" class="btn btn-success">Actualizar</button>
+      <button onclick="eliminarProductoDesdePanel()">🗑️ Eliminar seleccionado</button>
+
+      <hr>
+
+      <h4>➕ Agregar nuevo producto</h4>
+      <input id="nuevoNombre" class="input" placeholder="📝 Nombre del producto" />
+      <input id="nuevoPrecio" class="input" placeholder="💲 Precio actual (ej: 120000)" />
+      <input id="nuevoPrecioOriginal" class="input" placeholder="💲 Precio original (ej: 150000)" />
+      <input id="nuevoImagen" class="input" placeholder="🖼️ URL imagen principal" />
+      <input id="nuevoColor" class="input" placeholder="🎨 Color (ej: negro, blanco...)" />
+      <input id="nuevoTallas" class="input" placeholder="📏 Tallas separadas por coma" />
+      <button onclick="agregarNuevoProducto()" class="btn btn-success">Agregar Producto</button>
+
+      <button onclick="cerrarAdminPanel()" class="btn btn-secondary" style="margin-top:10px;">Cerrar</button>
+    </div>
+  </div>
+
+
+  <footer style="text-align: center; padding: 1rem; background: #2d3b49; color: white;">
+    <div style="font-size: 1.8rem;">
+      <a href="https://facebook.com/tu-pagina" target="_blank" style="margin: 0 10px; color: #0e54eb;"><i
+          class="fab fa-facebook"></i></a>
+      <a href="https://instagram.com/tu-pagina" target="_blank" style="margin: 0 10px; color: #e1306c;"><i
+          class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@tu-cuenta" target="_blank" style="margin: 0 10px; color: #000000;"><i
+          class="fab fa-tiktok"></i></a>
+    </div>
+    <div style="font-size: 0.9rem; color: #ccc;">
+      &copy; 2025 Moda & Estilo. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    // ✅ Configuración de Firebase ya personalizada
+    const firebaseConfig = {
+      apiKey: "AIzaSyCdRD_7zjuRp5586wcaa2WA_ZhzecKf5jM",
+      authDomain: "modaestilo-e8dec.firebaseapp.com",
+      projectId: "modaestilo-e8dec",
+      storageBucket: "modaestilo-e8dec.firebasestorage.app",
+      messagingSenderId: "710901651909",
+      appId: "1:710901651909:web:fe0bd97a14b25e191653ac"
+    };
+
+    // ✅ Inicializar Firebase y Firestore
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
+  <script>
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
     // ==== FUNCIONES DEL CARRITO ====
@@ -687,49 +717,44 @@
         mostrarNotificacion();
       });
     }
- 
 
-     // === ACTUALIZADO PANEL ADMINISTRADOR ===
-  function cargarProductos() {
-    const productos = document.querySelectorAll(".producto");
-    const selector = document.getElementById("selectorProducto");
-    selector.innerHTML = "";
-    productos.forEach((prod, i) => {
-      const nombre = prod.querySelector("h2").textContent;
-      const id = prod.getAttribute("data-id") || i;
-      selector.innerHTML += `<option value="${id}" data-index="${i}">${nombre}</option>`;
-    });
-  }
 
-  function eliminarProductoDesdePanel() {
-    const selector = document.getElementById("selectorProducto");
-    const id = selector.value;
-    const index = selector.selectedIndex;
-    const option = selector.options[index];
-    const indexHTML = option?.getAttribute("data-index");
-
-    if (!id || indexHTML === null) return alert("Selecciona un producto válido.");
-
-    if (confirm("¿Estás seguro de eliminar este producto desde Firebase?")) {
-      db.collection("productos").doc(id).delete()
-        .then(() => {
-          alert("✅ Producto eliminado correctamente");
-          const productos = document.querySelectorAll(".producto");
-          const prodHTML = productos[indexHTML];
-          prodHTML?.remove();
-          selector.remove(index);
-        })
-        .catch(error => {
-          console.error("Error al eliminar:", error);
-          alert("❌ Hubo un error al eliminar el producto");
-        });
+    // === ACTUALIZADO PANEL ADMINISTRADOR ===
+    function cargarProductos() {
+      const productos = document.querySelectorAll(".producto");
+      const selector = document.getElementById("selectorProducto");
+      selector.innerHTML = "";
+      productos.forEach((prod, i) => {
+        const nombre = prod.querySelector("h2").textContent;
+        const id = prod.getAttribute("data-id") || i;
+        selector.innerHTML += `<option value="${id}" data-index="${i}">${nombre}</option>`;
+      });
     }
+
+function eliminarProductoDesdePanel() {
+  const selector = document.getElementById("selectorProducto");
+  const id = selector.value;
+
+  if (!id) return alert("Selecciona un producto válido.");
+
+  if (confirm("¿Estás seguro de eliminar este producto desde Firebase?")) {
+    db.collection("productos").doc(id).delete()
+      .then(() => {
+        alert("✅ Producto eliminado correctamente");
+        cerrarAdminPanel();
+      })
+      .catch(error => {
+        console.error("Error al eliminar:", error);
+        alert("❌ Hubo un error al eliminar el producto");
+      });
   }
+}
+
 function actualizarProducto() {
   const selector = document.getElementById("selectorProducto");
   const id = selector.value;
-  const producto = document.querySelector(`.producto[data-id="${id}"]`);
-  if (!producto) return alert("❌ Producto no encontrado.");
+
+  if (!id) return alert("❌ Producto no encontrado.");
 
   const nuevaImagen = document.getElementById("nuevaImagen").value.trim();
   const nuevasTallas = document.getElementById("nuevasTallas").value.trim().split(",").map(t => t.trim()).filter(t => t);
@@ -738,17 +763,6 @@ function actualizarProducto() {
     return alert("⚠️ Ingresa al menos un cambio (imagen o tallas).");
   }
 
-  // ✅ Actualizar en pantalla
-  if (nuevaImagen) {
-    producto.querySelector(".main-img").src = nuevaImagen;
-  }
-
-  if (nuevasTallas.length > 0) {
-    const selectTalla = producto.querySelectorAll("select")[1];
-    selectTalla.innerHTML = nuevasTallas.map(t => `<option>${t}</option>`).join("");
-  }
-
-  // ✅ Actualizar en Firebase
   const updateData = {};
   if (nuevaImagen) updateData.imagen = nuevaImagen;
   if (nuevasTallas.length > 0) updateData.tallas = nuevasTallas;
@@ -763,6 +777,7 @@ function actualizarProducto() {
       alert("❌ No se pudo guardar en Firebase.");
     });
 }
+
 
 function agregarNuevoProducto() {
   const nombre = document.getElementById("nuevoNombre").value.trim();
@@ -788,66 +803,42 @@ function agregarNuevoProducto() {
       console.error("❌ Error guardando producto:", err);
       alert("❌ Error al guardar el producto.");
     });
+}
 
-      const nuevoHTML = `
-      <div class="producto" data-imagenes='{}'>
-        <img class="main-img" src="${imagen}" alt="${nombre}">
+
+function cargarProductosDesdeFirebase() {
+  db.collection("productos").onSnapshot(snapshot => {
+    const contenedor = document.getElementById("contenedor-productos");
+    contenedor.innerHTML = "";
+
+    snapshot.forEach(doc => {
+      const p = doc.data();
+      const id = doc.id;
+
+      const productoHTML = `
+      <div class="producto" data-id="${id}" data-imagenes='{}'>
+        <img class="main-img" src="${p.imagen}" alt="${p.nombre}">
         <div class="imagenes-mini"></div>
-        <h2>${nombre}</h2>
-        <p>Precio: <s>$${precioOriginal.toLocaleString()}</s> <strong>$${precio.toLocaleString()}</strong></p>
+        <h2>${p.nombre}</h2>
+        <p>Precio: <s>$${parseInt(p.precioOriginal).toLocaleString()}</s> <strong>$${parseInt(p.precio).toLocaleString()}</strong></p>
         <div class="opciones">
-          <select class="color-select"><option value="${color.toLowerCase()}">${color}</option></select>
-          <select>${tallas.map(t => `<option>${t}</option>`).join("")}</select>
+          <select class="color-select"><option value="${p.color.toLowerCase()}">${p.color}</option></select>
+          <select>${p.tallas.map(t => `<option>${t}</option>`).join("")}</select>
         </div>
-        <button>Agregar al carrito</button>
+        <button class="btn-agregar">Agregar al carrito</button>
       </div>
     `;
 
-      const productoContainer = document.createElement("div");
-      productoContainer.innerHTML = nuevoHTML;
-      const nuevoProducto = productoContainer.querySelector(".producto");
-      document.querySelector("#contenedor-productos").appendChild(nuevoProducto);
-      inicializarProducto(nuevoProducto);
+      const cont = document.createElement("div");
+      cont.innerHTML = productoHTML;
+      const nodo = cont.querySelector(".producto");
+      contenedor.appendChild(nodo);
+      inicializarProducto(nodo);
+    });
 
-      // Guardar en Firebase
-      db.collection("productos").add({ nombre, precio, precioOriginal, imagen, color, tallas })
-        .then(() => console.log("🟢 Producto guardado en Firebase"))
-        .catch(err => console.error("❌ Error guardando producto:", err));
-
-      alert("✅ Producto agregado exitosamente");
-      cerrarAdminPanel();
-    }
-
-    async function cargarProductosDesdeFirebase() {
-      const snapshot = await db.collection("productos").get();
-      snapshot.forEach(doc => {
-        const p = doc.data();
-        const id = doc.id;
-
-        const productoHTML = `
-        <div class="producto" data-id="${id}" data-imagenes='{}'>
-          <img class="main-img" src="${p.imagen}" alt="${p.nombre}">
-          <div class="imagenes-mini"></div>
-          <h2>${p.nombre}</h2>
-          <p>Precio: <s>$${parseInt(p.precioOriginal).toLocaleString()}</s> <strong>$${parseInt(p.precio).toLocaleString()}</strong></p>
-          <div class="opciones">
-            <select class="color-select"><option value="${p.color.toLowerCase()}">${p.color}</option></select>
-            <select>${p.tallas.map(t => `<option>${t}</option>`).join("")}</select>
-          </div>
-          <button>Agregar al carrito</button>
-          <button onclick="eliminarProductoDeFirebase('${id}')">🗑️ Eliminar</button>
-        </div>
-      `;
-
-        const cont = document.createElement("div");
-        cont.innerHTML = productoHTML;
-        const nodo = cont.querySelector(".producto");
-        document.querySelector("#contenedor-productos").appendChild(nodo);
-        inicializarProducto(nodo);
-      });
-    }
-
-
+    cargarProductos();
+  });
+}
 
     function guardarProductoEnFirebase(data) {
       return db.collection("productos").add(data);
@@ -868,49 +859,53 @@ function agregarNuevoProducto() {
       }
     }
 
-  // Acceso al modo administrador mediante combinación secreta
+    // Acceso al modo administrador mediante combinación secreta
 
-window.addEventListener("DOMContentLoaded", () => {
-  actualizarCarrito();
-  cargarProductosDesdeFirebase();
+    window.addEventListener("DOMContentLoaded", () => {
+      actualizarCarrito();
+      cargarProductosDesdeFirebase();
 
-  // ✅ Acceso al modo administrador mediante combinación secreta
-  document.addEventListener('keydown', function (e) {
-    if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'a') {
-      e.preventDefault();
-      const panel = document.getElementById("admin-panel");
-      if (panel) {
-        panel.style.display = "block";
-        document.getElementById("admin-login").style.display = "block";
-        document.getElementById("admin-contenido").style.display = "none";
+      // ✅ Acceso al modo administrador mediante combinación secreta
+      document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'a') {
+          e.preventDefault();
+          const panel = document.getElementById("admin-panel");
+          if (panel) {
+            panel.style.display = "block";
+            document.getElementById("admin-login").style.display = "block";
+            document.getElementById("admin-contenido").style.display = "none";
+          } else {
+            alert("No se encontró el panel de administrador.");
+          }
+        }
+      });
+    });
+
+
+    window.loginAdmin = function () {
+      const usuario = document.getElementById("admin-usuario").value.trim();
+      const clave = document.getElementById("admin-clave").value.trim();
+
+      if (usuario === "admin" && clave === "1234") {
+        document.getElementById("admin-login").style.display = "none";
+        document.getElementById("admin-contenido").style.display = "block";
       } else {
-        alert("No se encontró el panel de administrador.");
+        alert("❌ Usuario o clave incorrectos");
       }
-    }
-  });
-});
+    };
+
+    window.cerrarAdminPanel = function () {
+      document.getElementById("admin-panel").style.display = "none";
+      document.getElementById("admin-login").style.display = "block";
+      document.getElementById("admin-contenido").style.display = "none";
+      document.getElementById("admin-usuario").value = "";
+      document.getElementById("admin-clave").value = "";
+    };
 
 
-  window.loginAdmin = function () {
-    const usuario = document.getElementById("admin-usuario").value.trim();
-    const clave = document.getElementById("admin-clave").value.trim();
+  </script>
 
-    if (usuario === "admin" && clave === "1234") {
-      document.getElementById("admin-login").style.display = "none";
-      document.getElementById("admin-contenido").style.display = "block";
-    } else {
-      alert("❌ Usuario o clave incorrectos");
-    }
-  };
 
-  window.cerrarAdminPanel = function () {
-    document.getElementById("admin-panel").style.display = "none";
-    document.getElementById("admin-login").style.display = "block";
-    document.getElementById("admin-contenido").style.display = "none";
-    document.getElementById("admin-usuario").value = "";
-    document.getElementById("admin-clave").value = "";
-  };
-
-</script>
 </body>
+
 </html>
