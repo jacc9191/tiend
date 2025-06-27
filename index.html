@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
 
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Moda&EstiloKm</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<title>Moda&amp;EstiloKm</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet"/>
+<style>
     /* ==== RESET GLOBAL ==== */
     *,
     *::before,
@@ -443,113 +443,85 @@
       }
     }
   </style>
-
-</head>
-
+</meta></head>
 <body>
-
-  <header>
-    <h1>Moda & Estilo co</h1>
-  </header>
-
-  <div id="notificacion" class="notificacion oculto">Producto agregado al carrito 🛒</div>
-  <!-- Botón que despliega TODO -->
-  <div class="fila-carrito">
-    <button class="btn-ver-carrito" onclick="toggleCarrito()">Ver Carrito</button>
-  </div>
-
-
-  <!-- Contenedor de todo: carrito, total, botones y formulario -->
-  <div id="bloqueCarrito" class="oculto container">
-
-
-    <div id="carrito"></div>
-
-    <div id="total-carrito"></div>
-
-    <div style="text-align:center; margin-top: 1rem;">
-      <button class="btn btn-success" onclick="mostrarFormulario()">✅ Finalizar compra</button>
-    </div>
-
-    <!-- Formulario dentro del mismo bloque -->
-    <div id="formularioCliente" class="oculto" style="margin-top: 2rem;">
-      <h3>📋 Datos del Cliente</h3>
-      <form onsubmit="event.preventDefault(); confirmarEnvioWhatsApp();">
-        <input class="input" id="nombreCliente" placeholder="👤 Nombre completo" required />
-        <input class="input" id="departamentoCliente" placeholder="🏛️ Departamento" required />
-        <input class="input" id="ciudadCliente" placeholder="🏙️ Ciudad" required />
-        <input class="input" id="direccionCliente" placeholder="🏠 Dirección" required />
-        <input class="input" id="celularCliente" placeholder="📞 Celular" required />
-        <select class="input" id="metodoPagoCliente" required>
-          <option value="">💳 Selecciona método de pago</option>
-          <option value="Efectivo">Efectivo</option>
-          <option value="Transferencia">Transferencia</option>
-          <option value="Contra entrega">Contra entrega</option>
-        </select>
-        <button type="submit" class="btn btn-success">📲 Enviar pedido por WhatsApp</button>
-        <button type="button" class="btn btn-secondary" onclick="ocultarFormulario()">🔙 Volver</button>
-      </form>
-    </div>
-
-  </div>
-
-
-  <div id="contenedor-productos"></div>
-
-
-  <a href="https://wa.me/573185634316" target="_blank" class="btn-whatsapp"
-    aria-label="Chatea con nosotros por WhatsApp">
-    <i class="fab fa-whatsapp"></i><span class="texto-wsp"> </span>
-  </a>
-<div id="admin-panel" style="display:none;">
-  <!-- Formulario de login -->
-  <div id="admin-login">
-    <input id="admin-usuario" placeholder="Usuario">
-    <input id="admin-clave" type="password" placeholder="Clave">
-    <button onclick="loginAdmin()">Entrar</button>
-  </div>
-
-  <!-- Panel de contenido del administrador -->
-  <div id="admin-contenido" style="display:none;">
-    <h3>🛠️ Panel de Control</h3>
-
-    <h4>Editar producto existente</h4>
-    <select id="selectorProducto" class="input"></select>
-    <input id="nuevaImagen" class="input" placeholder="📷 URL nueva imagen" />
-    <input id="nuevasTallas" class="input" placeholder="📏 Tallas separadas por coma (35,36...)" />
-    <button onclick="actualizarProducto()" class="btn btn-success">Actualizar</button>
-    <button onclick="eliminarProductoDesdePanel()">🗑️ Eliminar seleccionado</button>
-
-    <hr>
-
-    <h4>➕ Agregar nuevo producto</h4>
-    <input id="nuevoNombre" class="input" placeholder="📝 Nombre del producto" />
-    <input id="nuevoPrecio" class="input" placeholder="💲 Precio actual (ej: 120000)" />
-    <input id="nuevoPrecioOriginal" class="input" placeholder="💲 Precio original (ej: 150000)" />
-    <input id="nuevoImagen" class="input" placeholder="🖼️ URL imagen principal" />
-    <input id="nuevoColor" class="input" placeholder="🎨 Color (ej: negro, blanco...)" />
-    <input id="nuevoTallas" class="input" placeholder="📏 Tallas separadas por coma" />
-    <button onclick="agregarNuevoProducto()" class="btn btn-success">Agregar Producto</button>
-
-    <button onclick="cerrarAdminPanel()" class="btn btn-secondary" style="margin-top:10px;">Cerrar</button>
-  </div>
+<header>
+<h1>Moda &amp; Estilo co</h1>
+</header>
+<div class="notificacion oculto" id="notificacion">Producto agregado al carrito 🛒</div>
+<!-- Botón que despliega TODO -->
+<div class="fila-carrito">
+<button class="btn-ver-carrito" onclick="toggleCarrito()">Ver Carrito</button>
 </div>
-
-
-  <footer style="text-align: center; padding: 1rem; background: #2d3b49; color: white;">
-    <div style="font-size: 1.8rem;">
-      <a href="https://facebook.com/tu-pagina" target="_blank" style="margin: 0 10px; color: #0e54eb;"><i
-          class="fab fa-facebook"></i></a>
-      <a href="https://instagram.com/tu-pagina" target="_blank" style="margin: 0 10px; color: #e1306c;"><i
-          class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@tu-cuenta" target="_blank" style="margin: 0 10px; color: #000000;"><i
-          class="fab fa-tiktok"></i></a>
+<!-- Contenedor de todo: carrito, total, botones y formulario -->
+<div class="oculto container" id="bloqueCarrito">
+<div id="carrito"></div>
+<div id="total-carrito"></div>
+<div style="text-align:center; margin-top: 1rem;">
+<button class="btn btn-success" onclick="mostrarFormulario()">✅ Finalizar compra</button>
+</div>
+<!-- Formulario dentro del mismo bloque -->
+<div class="oculto" id="formularioCliente" style="margin-top: 2rem;">
+<h3>📋 Datos del Cliente</h3>
+<form onsubmit="event.preventDefault(); confirmarEnvioWhatsApp();">
+<input class="input" id="nombreCliente" placeholder="👤 Nombre completo" required=""/>
+<input class="input" id="departamentoCliente" placeholder="🏛️ Departamento" required=""/>
+<input class="input" id="ciudadCliente" placeholder="🏙️ Ciudad" required=""/>
+<input class="input" id="direccionCliente" placeholder="🏠 Dirección" required=""/>
+<input class="input" id="celularCliente" placeholder="📞 Celular" required=""/>
+<select class="input" id="metodoPagoCliente" required="">
+<option value="">💳 Selecciona método de pago</option>
+<option value="Efectivo">Efectivo</option>
+<option value="Transferencia">Transferencia</option>
+<option value="Contra entrega">Contra entrega</option>
+</select>
+<button class="btn btn-success" type="submit">📲 Enviar pedido por WhatsApp</button>
+<button class="btn btn-secondary" onclick="ocultarFormulario()" type="button">🔙 Volver</button>
+</form>
+</div>
+</div>
+<div id="contenedor-productos"></div>
+<a aria-label="Chatea con nosotros por WhatsApp" class="btn-whatsapp" href="https://wa.me/573185634316" target="_blank">
+<i class="fab fa-whatsapp"></i><span class="texto-wsp"> </span>
+</a>
+<div id="admin-panel" style="display:none;">
+<!-- Formulario de login -->
+<div id="admin-login">
+<input id="admin-usuario" placeholder="Usuario"/>
+<input id="admin-clave" placeholder="Clave" type="password"/>
+<button onclick="loginAdmin()">Entrar</button>
+</div>
+<!-- Panel de contenido del administrador -->
+<div id="admin-contenido" style="display:none;">
+<h3>🛠️ Panel de Control</h3>
+<h4>Editar producto existente</h4>
+<select class="input" id="selectorProducto"></select>
+<input class="input" id="nuevaImagen" placeholder="📷 URL nueva imagen">
+<input class="input" id="nuevasTallas" placeholder="📏 Tallas separadas por coma (35,36...)">
+<button class="btn btn-success" onclick="actualizarProducto()">Actualizar</button>
+<button onclick="eliminarProductoDesdePanel()">🗑️ Eliminar seleccionado</button>
+<hr/>
+<h4>➕ Agregar nuevo producto</h4>
+<input class="input" id="nuevoNombre" placeholder="📝 Nombre del producto"/>
+<input class="input" id="nuevoPrecio" placeholder="💲 Precio actual (ej: 120000)"/>
+<input class="input" id="nuevoPrecioOriginal" placeholder="💲 Precio original (ej: 150000)"/>
+<input class="input" id="nuevoImagen" placeholder="🖼️ URL imagen principal"/>
+<input class="input" id="nuevoColor" placeholder="🎨 Color (ej: negro, blanco...)"/>
+<input class="input" id="nuevoTallas" placeholder="📏 Tallas separadas por coma"/>
+<button class="btn btn-success" onclick="agregarNuevoProducto()">Agregar Producto</button>
+<button class="btn btn-secondary" onclick="cerrarAdminPanel()" style="margin-top:10px;">Cerrar</button>
+</input></input></div>
+</div>
+<footer style="text-align: center; padding: 1rem; background: #2d3b49; color: white;">
+<div style="font-size: 1.8rem;">
+<a href="https://facebook.com/tu-pagina" style="margin: 0 10px; color: #0e54eb;" target="_blank"><i class="fab fa-facebook"></i></a>
+<a href="https://instagram.com/tu-pagina" style="margin: 0 10px; color: #e1306c;" target="_blank"><i class="fab fa-instagram"></i></a>
+<a href="https://www.tiktok.com/@tu-cuenta" style="margin: 0 10px; color: #000000;" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+<div style="font-size: 0.9rem; color: #ccc;">
+      © 2025 Moda &amp; Estilo. Todos los derechos reservados.
     </div>
-    <div style="font-size: 0.9rem; color: #ccc;">
-      &copy; 2025 Moda & Estilo. Todos los derechos reservados.
-    </div>
-  </footer>
-
+</footer>
 <script>
   // ✅ Configuración de Firebase ya personalizada
   const firebaseConfig = {
@@ -565,8 +537,7 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 </script>
-
-  <script>
+<script>
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
     // ==== FUNCIONES DEL CARRITO ====
@@ -793,18 +764,30 @@ function actualizarProducto() {
     });
 }
 
-    function agregarNuevoProducto() {
-      const nombre = document.getElementById("nuevoNombre").value.trim();
-      const precio = parseInt(document.getElementById("nuevoPrecio").value);
-      const precioOriginal = parseInt(document.getElementById("nuevoPrecioOriginal").value);
-      const imagen = document.getElementById("nuevoImagen").value.trim();
-      const color = document.getElementById("nuevoColor").value.trim();
-      const tallas = document.getElementById("nuevoTallas").value.split(",").map(t => t.trim());
+function agregarNuevoProducto() {
+  const nombre = document.getElementById("nuevoNombre").value.trim();
+  const precio = parseInt(document.getElementById("nuevoPrecio").value);
+  const precioOriginal = parseInt(document.getElementById("nuevoPrecioOriginal").value);
+  const imagen = document.getElementById("nuevoImagen").value.trim();
+  const color = document.getElementById("nuevoColor").value.trim();
+  const tallas = document.getElementById("nuevoTallas").value.split(",").map(t => t.trim());
 
-      if (!nombre || isNaN(precio) || isNaN(precioOriginal) || !imagen || !color || tallas.length === 0) {
-        alert("⚠️ Debes completar todos los campos correctamente.");
-        return;
-      }
+  if (!nombre || isNaN(precio) || isNaN(precioOriginal) || !imagen || !color || tallas.length === 0) {
+    alert("⚠️ Debes completar todos los campos correctamente.");
+    return;
+  }
+
+  const data = { nombre, precio, precioOriginal, imagen, color, tallas };
+
+  db.collection("productos").add(data)
+    .then(() => {
+      alert("✅ Producto agregado exitosamente");
+      cerrarAdminPanel();
+    })
+    .catch(err => {
+      console.error("❌ Error guardando producto:", err);
+      alert("❌ Error al guardar el producto.");
+    });
 
       const nuevoHTML = `
       <div class="producto" data-imagenes='{}'>
@@ -928,10 +911,6 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("admin-clave").value = "";
   };
 
-
 </script>
-
-
 </body>
-
 </html>
