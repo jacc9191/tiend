@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Moda&Estilo1</title>
+  <title>Moda&Estilo18</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -449,7 +449,7 @@
 <body>
 
   <header>
-    <h1>Moda & Estilo</h1>
+    <h1>Moda & Estilo colo</h1>
   </header>
 
   <div id="notificacion" class="notificacion oculto">Producto agregado al carrito 🛒</div>
@@ -771,25 +771,45 @@
   }
 
     function actualizarProducto() {
-      const index = document.getElementById("selectorProducto").value;
-      const url = document.getElementById("nuevaImagen").value;
-      const tallas = document.getElementById("nuevasTallas").value.split(",").map(t => t.trim());
-      const productos = document.querySelectorAll(".producto");
-      const prod = productos[index];
+  const selector = document.getElementById("selectorProducto");
+  const id = selector.value;
+  const index = selector.selectedIndex;
+  const producto = document.querySelectorAll(".producto")[index];
+  if (!producto) return alert("❌ Producto no encontrado.");
 
-      if (url) prod.querySelector(".main-img").src = url;
+  const nuevaImagen = document.getElementById("nuevaImagen").value.trim();
+  const nuevasTallas = document.getElementById("nuevasTallas").value.trim().split(",").map(t => t.trim()).filter(t => t);
 
-      if (tallas.length > 0) {
-        const selectTalla = prod.querySelectorAll("select")[1];
-        selectTalla.innerHTML = "";
-        tallas.forEach(t => {
-          selectTalla.innerHTML += `<option>${t}</option>`;
-        });
-      }
+  if (!nuevaImagen && nuevasTallas.length === 0) {
+    return alert("⚠️ Ingresa al menos un cambio (imagen o tallas).");
+  }
 
-      alert("✅ Producto actualizado");
+  // Actualizar visualmente
+  if (nuevaImagen) {
+    producto.querySelector(".main-img").src = nuevaImagen;
+  }
+
+  if (nuevasTallas.length > 0) {
+    const selectTalla = producto.querySelectorAll("select")[1];
+    selectTalla.innerHTML = nuevasTallas.map(t => `<option>${t}</option>`).join("");
+  }
+
+  // Actualizar en Firebase
+  const updateData = {};
+  if (nuevaImagen) updateData.imagen = nuevaImagen;
+  if (nuevasTallas.length > 0) updateData.tallas = nuevasTallas;
+
+  db.collection("productos").doc(id).update(updateData)
+    .then(() => {
+      alert("✅ Cambios guardados correctamente");
       cerrarAdminPanel();
-    }
+    })
+    .catch(err => {
+      console.error("❌ Error al actualizar Firebase:", err);
+      alert("❌ No se pudo guardar en Firebase.");
+    });
+}
+
 
     function agregarNuevoProducto() {
       const nombre = document.getElementById("nuevoNombre").value.trim();
